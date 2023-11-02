@@ -9,16 +9,6 @@ function Layout(props) {
         <div>React</div>
       </header>
       {props.children}
-
-      <div className={styles.workTitle}>
-        <h3>Woring</h3>
-      </div>
-      <div className={styles.listWork} id="work"></div>
-
-      <div className={styles.doneTitle}>
-        <h3>Done</h3>
-      </div>
-      <div className={styles.listDone} id="done"></div>
     </div>
   );
 }

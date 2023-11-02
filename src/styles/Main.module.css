@@ -59,36 +59,22 @@ input {
   background: rgba(0, 118, 255, 0.9);
   box-shadow: 0 6px 20px rgb(0 118 255 / 23%);
 }
-
+/* 리스트 영역 */
+.listArea {
+  width: 230px;
+  height: 150px;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid black;
+}
+h3 {
+  display: flex;
+}
 /* Work 리스트 */
-.workTitle {
-  grid-area: workTitle;
-  padding-left: 20px;
+.listContainer {
+  display: inline-block;
   border: 1px solid black;
-}
-.listWork {
-  grid-area: listWork;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding: 20px;
-  border: 1px solid black;
-  overflow-y: auto;
-}
-/* Done 리스트 */
-.doneTitle {
-  grid-area: doneTitle;
-  padding-left: 20px;
-  border: 1px solid black;
-}
-.listDone {
-  grid-area: listDone;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding: 20px;
-  border: 1px solid black;
-  overflow-y: auto;
+  border-radius: 10px;
+  width: 300px;
+  margin-right: 10px;
 }

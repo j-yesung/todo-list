@@ -2,49 +2,63 @@ import React, { useState } from 'react';
 import styles from '../styles/Main.module.css';
 
 function Form() {
-  // 리스트 상태 관리
-  const [createList, setCreateList] = useState([]);
-  const workTitle = document.querySelector('#work');
-  console.log(workTitle);
-  const generateHTML = () => {
-    const newHTML = <p>This is dynamically generated HTML.</p>;
+  const [todo, setTodo] = useState([]);
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
 
-    setCreateList(prevHTML => [...prevHTML, newHTML]);
+  const handleTitleChange = e => {
+    setTitle(e.target.value);
   };
 
-  // const onSubmitHandler = e => {
-  //   e.preventDefault();
-  //   const workTitle = document.querySelector('#work');
-  //   const titleValue = document.querySelector('.title').value;
-  //   const contentValue = document.querySelector('.content').value;
-  //   const contentText = `
-  //     <div class=${listArea}>
-  //       <div>
-  //         ${titleValue}
-  //       </div>
-  //       <div>
-  //         ${contentValue}
-  //       </div>
+  const handleContentChange = e => {
+    setContent(e.target.value);
+  };
 
-  //     </div>
-  //   `;
+  const handleAddTodo = () => {
+    const newTodo = {
+      id: todo.length + 1,
+      title: title,
+      content: content,
+      isDone: false,
+    };
 
-  //   workTitle.insertAdjacentHTML('afterbegin', contentText);
-  // };
+    setTodo(prevTodos => [...prevTodos, newTodo]);
+    setTitle('');
+    setContent('');
+  };
+
+  const handleToggleTodo = id => {
+    setTodo(prevTodos => prevTodos.map(todo => (todo.id === id ? { ...todo, isDone: !todo.isDone } : todo)));
+  };
+
+  const workingTodos = todo.filter(todo => !todo.isDone);
+  const doneTodos = todo.filter(todo => todo.isDone);
 
   return (
-    <div className={styles.contentBox}>
-      <form className={styles.inputArea}>
-        <label className={styles.text}>제목 : </label>
-        <input type="text" className="title" placeholder="제목을 입력해 주세요." />
-        <label className={styles.text}>내용 : </label>
-        <input type="text" className="content" placeholder="내용을 입력해 주세요." />
-        <button type="button" className={styles.addButton} onClick={generateHTML}>
+    <div>
+      <h1>Todo List</h1>
+      <div>
+        <input type="text" placeholder="제목" value={title} onChange={handleTitleChange} />
+        <input type="text" placeholder="내용" value={content} onChange={handleContentChange} />
+        <button className={styles.addButton} onClick={handleAddTodo}>
           추가하기
         </button>
-      </form>
-      {createList.map((html, index) => (
-        <div key={index}>{html}</div>
+      </div>
+      <h2>Working 🔥</h2>
+      {workingTodos.map(todo => (
+        <div key={todo.id} className={styles.listContainer}>
+          <h3>{todo.title}</h3>
+          <p>{todo.content}</p>
+          <button onClick={() => handleToggleTodo(todo.id)}>{todo.isDone ? '취소' : '완료'}</button>
+        </div>
+      ))}
+      <h2>Done ✅</h2>
+      {doneTodos.map(todo => (
+        <div key={todo.id} className={styles.listContainer}>
+          <h3>{todo.title}</h3>
+          <p>{todo.content}</p>
+          <button onClick={() => handleToggleTodo(todo.id)}>{todo.isDone ? '취소' : '완료'}</button>
+        </div>
       ))}
     </div>
   );
