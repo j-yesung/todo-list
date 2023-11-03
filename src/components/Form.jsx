@@ -1,6 +1,21 @@
 import React, { useState } from 'react';
 import styles from '../styles/Main.module.css';
 
+function TodoItem({ todos, handleClickToggleTodo, handleClickRemoveTodo }) {
+  return todos.map(todo => (
+    <div key={todo.id} className={styles.todoList}>
+      <h3>{todo.title}</h3>
+      <p>{todo.content}</p>
+      <button className={styles.todoSuccessButton} onClick={() => handleClickToggleTodo(todo.id)}>
+        {todo.isDone ? '취소' : '완료'}
+      </button>
+      <button className={styles.todoRemoveButton} onClick={() => handleClickRemoveTodo(todo.id)}>
+        삭제
+      </button>
+    </div>
+  ));
+}
+
 function Form() {
   const [todo, setTodo] = useState([]); // Todo 리스트 상태 관리
   const [title, setTitle] = useState(''); // 제목 입력 값 상태 관리
@@ -54,33 +69,19 @@ function Form() {
       </div>
       <h2>할 일 🔥</h2>
       <div className={styles.todoContainer}>
-        {workingTodos.map(todo => (
-          <div key={todo.id} className={styles.todoList}>
-            <h3>{todo.title}</h3>
-            <p>{todo.content}</p>
-            <button className={styles.todoSuccessButton} onClick={() => handleClickToggleTodo(todo.id)}>
-              {todo.isDone ? '취소' : '완료'}
-            </button>
-            <button className={styles.todoRemoveButton} onClick={() => handleClickRemoveTodo(todo.id)}>
-              삭제
-            </button>
-          </div>
-        ))}
+        <TodoItem
+          todos={workingTodos}
+          handleClickToggleTodo={handleClickToggleTodo}
+          handleClickRemoveTodo={handleClickRemoveTodo}
+        ></TodoItem>
       </div>
       <h2>완료 ✅</h2>
       <div className={styles.todoContainer}>
-        {doneTodos.map(todo => (
-          <div key={todo.id} className={styles.todoList}>
-            <h3>{todo.title}</h3>
-            <p>{todo.content}</p>
-            <button className={styles.todoCancelButton} onClick={() => handleClickToggleTodo(todo.id)}>
-              {todo.isDone ? '취소' : '완료'}
-            </button>
-            <button className={styles.todoRemoveButton} onClick={() => handleClickRemoveTodo(todo.id)}>
-              삭제
-            </button>
-          </div>
-        ))}
+        <TodoItem
+          todos={doneTodos}
+          handleClickToggleTodo={handleClickToggleTodo}
+          handleClickRemoveTodo={handleClickRemoveTodo}
+        ></TodoItem>
       </div>
     </div>
   );
