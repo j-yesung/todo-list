@@ -2,6 +2,20 @@ body {
   display: flex;
   justify-content: center;
 }
+/* 버튼 공통 CSS */
+button {
+  float: right;
+}
+input {
+  width: 250px;
+  height: 32px;
+  font-size: 15px;
+  border: 1;
+  border-radius: 15px;
+  outline: none;
+  padding-left: 10px;
+  margin-right: 10px;
+}
 .container {
   width: 1200px;
   margin: 0;
@@ -23,23 +37,12 @@ body {
   padding: 10px;
   border: 1px solid black;
 }
-input {
-  width: 250px;
-  height: 32px;
-  font-size: 15px;
-  border: 0;
-  border-radius: 15px;
-  outline: none;
-  padding-left: 10px;
-  background-color: rgb(210, 210, 210);
-}
 .text {
   margin-left: 10px;
 }
 .addButton {
   justify-content: center;
   align-items: center;
-  float: right;
   display: flex;
   outline: 0;
   cursor: pointer;
@@ -59,22 +62,77 @@ input {
   background: rgba(0, 118, 255, 0.9);
   box-shadow: 0 6px 20px rgb(0 118 255 / 23%);
 }
-/* 리스트 영역 */
-.listArea {
-  width: 230px;
-  height: 150px;
-  padding: 20px;
-  border-radius: 10px;
-  border: 1px solid black;
-}
-h3 {
+/* TODO 영역 */
+.todoContainer {
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 10px;
 }
-/* Work 리스트 */
-.listContainer {
-  display: inline-block;
-  border: 1px solid black;
+.todoList {
+  padding: 10px;
+  border: 2px solid black;
   border-radius: 10px;
-  width: 300px;
-  margin-right: 10px;
+  width: 260px;
+  word-wrap: break-word;
+}
+/* TODO 완료 버튼 */
+.todoSuccessButton {
+  display: inline-block;
+  outline: 0;
+  cursor: pointer;
+  border-radius: 6px;
+  border: 2px solid #2dcb62;
+  color: #fff;
+  background-color: #2dcb62;
+  padding: 6px;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 2px 4px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1.5px 0px;
+  font-weight: 800;
+  font-size: 16px;
+  height: 30px;
+  margin: 2px;
+}
+.todoSuccessButton:hover {
+  background: 0 0;
+  color: #2dcb62;
+}
+/* TODO 취소 버튼 */
+.todoCancelButton {
+  display: inline-block;
+  outline: 0;
+  cursor: pointer;
+  border-radius: 6px;
+  border: 2px solid #e8e10a;
+  color: #fff;
+  background-color: #e8e10a;
+  padding: 6px;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 2px 4px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1.5px 0px;
+  font-weight: 800;
+  font-size: 16px;
+  height: 30px;
+  margin: 2px;
+}
+.todoCancelButton:hover {
+  background: 0 0;
+  color: #e8e10a;
+}
+/* TODO 삭제 버튼 */
+.todoRemoveButton {
+  display: inline-block;
+  outline: 0;
+  cursor: pointer;
+  border-radius: 6px;
+  border: 2px solid #ff4742;
+  color: #fff;
+  background-color: #ff4742;
+  padding: 6px;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 2px 4px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1.5px 0px;
+  font-weight: 800;
+  font-size: 16px;
+  height: 30px;
+  margin: 2px;
+}
+.todoRemoveButton:hover {
+  background: 0 0;
+  color: #ff4742;
 }
