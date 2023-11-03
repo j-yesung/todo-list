@@ -2,11 +2,18 @@ import React, { useState } from 'react';
 import styles from '../styles/Main.module.css';
 
 function TodoItem({ todos, handleClickToggleTodo, handleClickRemoveTodo }) {
+  let buttonStyleClass = null;
+  todos.filter(todo =>
+    todo.isDone === false
+      ? (buttonStyleClass = styles.todoSuccessButton)
+      : (buttonStyleClass = styles.todoCancelButton),
+  );
+
   return todos.map(todo => (
     <div key={todo.id} className={styles.todoList}>
       <h3>{todo.title}</h3>
       <p>{todo.content}</p>
-      <button className={styles.todoSuccessButton} onClick={() => handleClickToggleTodo(todo.id)}>
+      <button className={buttonStyleClass} onClick={() => handleClickToggleTodo(todo.id)}>
         {todo.isDone ? '취소' : '완료'}
       </button>
       <button className={styles.todoRemoveButton} onClick={() => handleClickRemoveTodo(todo.id)}>
@@ -23,13 +30,7 @@ function Form() {
   const workingTodos = todo.filter(todo => !todo.isDone);
   const doneTodos = todo.filter(todo => todo.isDone);
 
-  /**
-   * Todo 추가
-   * id : 배열의 길이 (0부터 시작이라 +1 함)
-   * title : 제목 입력 값
-   * content : 내용 입력 값 저장
-   * isDone : 버튼 클릭 시 상태 값 확인 - default -> false
-   */
+  // TODO 추가
   const handleClickAddTodo = () => {
     if (title === '' && content === '') return alert('제목과 내용을 입력해 주세요.');
     const newTodo = {
@@ -48,9 +49,8 @@ function Form() {
   const handleTitleChange = e => setTitle(e.target.value);
   const handleContentChange = e => setContent(e.target.value);
   const handleClickRemoveTodo = id => setTodo(prevTodos => prevTodos.filter(todo => todo.id !== id));
-  const handleClickToggleTodo = id => {
+  const handleClickToggleTodo = id =>
     setTodo(prevTodos => prevTodos.map(todo => (todo.id === id ? { ...todo, isDone: !todo.isDone } : todo)));
-  };
 
   return (
     <div>
@@ -61,8 +61,6 @@ function Form() {
       >
         <input type="text" placeholder="제목" value={title} onChange={handleTitleChange} />
         <input type="text" placeholder="내용" value={content} onChange={handleContentChange} />
-        {/* 인풋 박스 디자인 테스트 */}
-
         <button className={styles.addButton} onClick={handleClickAddTodo}>
           TODO 추가
         </button>
