@@ -25,9 +25,7 @@ function Form() {
   const [content, setContent] = useState(''); // 내용 입력 값 상태 관리
 
   const workingTodos = todo.filter(todo => !todo.isDone);
-  console.log('workingTodos: ', workingTodos);
   const doneTodos = todo.filter(todo => todo.isDone);
-  console.log('doneTodos: ', doneTodos);
 
   // TODO 추가
   const handleClickAddTodo = () => {
