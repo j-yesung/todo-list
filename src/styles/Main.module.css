@@ -2,6 +2,10 @@ body {
   display: flex;
   justify-content: center;
 }
+h2 {
+  grid-area: title;
+  padding: 10px;
+}
 /* 버튼 공통 CSS */
 button {
   float: right;
@@ -19,23 +23,23 @@ input {
 .container {
   width: 1200px;
   margin: 0;
+  padding: 10px;
   display: grid;
+  border: 2px solid black;
+  border-radius: 15px;
   grid-template-columns: 6fr;
   grid-template-rows: 50px 50px 50px 300px 50px 300px;
-  grid-template-areas: 'header' 'content' 'workTitle' 'listWork' 'doneTitle' 'listDone';
+  grid-template-areas: 'header' 'content' 'title' 'todoList' 'title' 'todoList';
 }
 .header {
   padding: 20px;
-  grid-area: header;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid black;
 }
-.contentBox {
+.todoContent {
   grid-area: content;
   padding: 10px;
-  border: 1px solid black;
 }
 .text {
   margin-left: 10px;
@@ -64,12 +68,16 @@ input {
 }
 /* TODO 영역 */
 .todoContainer {
+  grid-area: content;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   gap: 10px;
+  max-height: 300px;
+  overflow-y: scroll;
 }
 .todoList {
+  grid-area: todoList;
   padding: 10px;
   border: 2px solid black;
   border-radius: 10px;
