@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../styles/Main.module.css';
 
 function TodoItem(props) {
@@ -24,12 +24,27 @@ function Form() {
   const [title, setTitle] = useState(''); // 제목 입력 값 상태 관리
   const [content, setContent] = useState(''); // 내용 입력 값 상태 관리
 
+  useEffect(() => {
+    // 로컬 스토리지에서 데이터 불러오기
+    const savedTodo = localStorage.getItem('todo');
+
+    // 불러온 데이터가 있을 경우, 상태에 저장하기
+    if (savedTodo) {
+      setTodo(JSON.parse(savedTodo));
+    }
+  }, []);
+
+  useEffect(() => {
+    // 컴포넌트 상태 변화 감지 시 로컬 스토리지에 데이터 저장하기
+    localStorage.setItem('todo', JSON.stringify(todo));
+  }, [todo]);
+
   const workingTodos = todo.filter(todo => !todo.isDone);
   const doneTodos = todo.filter(todo => todo.isDone);
 
   // TODO 추가
   const handleClickAddTodo = () => {
-    if (title.trim() === '' || content.trim() === '') return alert('제목과 내용을 입력해 주세요.');
+    if (title.trim() === '' || content.trim() === '') alert('제목과 내용을 입력해 주세요.');
     const newTodo = {
       id: Date.now(), // 고유 값
       title: title,
