@@ -25,7 +25,7 @@ input {
   margin: 0;
   padding: 10px;
   display: grid;
-  border: 2px solid black;
+  /* border: 2px solid black; */
   border-radius: 15px;
   grid-template-columns: 6fr;
   grid-template-rows: 50px 50px 50px 300px 50px 300px;
